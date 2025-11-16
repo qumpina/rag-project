@@ -1,4 +1,6 @@
-__pycache__/ 
-*.pyc 
-data/raw/ 
-models/ 
+__pycache__/
+*.pyc
+data/raw/
+models/
+
+venv

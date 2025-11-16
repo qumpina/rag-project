@@ -30,28 +30,28 @@ class EmbeddingModel(EmbeddingContract):
             model_path = getattr(model, 'model_path', None)
 
             info = {
-                # Базовая информация
+                # пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 "model_type": "SentenceTransformer",
                 "model_name": getattr(model, 'model_name', 'Unknown'),
                 "model_path": model_path,
 
-                # Технические характеристики
+                # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 "embedding_dimension": model.get_sentence_embedding_dimension(),
                 "max_sequence_length": model.get_max_seq_length(),
                 "normalize_embeddings": getattr(model, '_modules', {}).get('2', None) is not None,
                 # Check if Normalize layer exists
 
-                # Архитектура модели
+                # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                 "modules": [],
                 "trainable_parameters": sum(p.numel() for p in model.parameters() if p.requires_grad),
                 "total_parameters": sum(p.numel() for p in model.parameters()),
 
-                # Информация о времени запуска
+                # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 "device": str(model.device),
                 "dtype": str(next(model.parameters()).dtype),
                 "model_size_mb": self._get_model_size(model_path) if model_path else 'Unknown',
 
-                # Информация о токенайзере
+                # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 "tokenizer_info": {
                     "type": type(model.tokenizer).__name__,
                     "vocab_size": len(model.tokenizer),
@@ -59,7 +59,7 @@ class EmbeddingModel(EmbeddingContract):
                     "unknown_token": getattr(model.tokenizer, 'unk_token', None),
                 } if hasattr(model, 'tokenizer') else {},
 
-                # Информация о совместимостях
+                # пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 "supported_tasks": ["text-embeddings", "semantic-similarity", "clustering"],
                 "sklearn_compatible": True,
             }
